@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trace 履迹 · 项目展示</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8F7F4;
+    --sidebar: #EDEAE4;
+    --brand: #1D9E75;
+    --brand-light: #E8F7F2;
+    --brand-border: #9FE1CB;
+    --brand-dark: #0F6E56;
+    --text: #1A1A1A;
+    --text-sub: #6B6B6B;
+    --text-muted: #B0ADA6;
+    --border: #E8E4DD;
+    --divider: #F0EDE8;
+    --yellow-bg: #FFFBEB;
+    --yellow-border: #FDE68A;
+    --yellow-text: #92400E;
+    --card-bg: #FFFFFF;
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.04);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 14px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--text);
+    color: #fff;
+    padding: 80px 64px 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 80% 50%, #1D9E7522 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--brand);
+  }
+
+  .hero-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 1.05;
+    letter-spacing: -1px;
+    margin-bottom: 8px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--brand);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 40px;
+    letter-spacing: 0.3px;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .hero-meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .hero-meta-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+  .hero-meta-val {
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .hero-divider {
+    width: 1px;
+    height: 32px;
+    background: rgba(255,255,255,0.12);
+  }
+
+  .hero-tagline {
+    margin-top: 48px;
+    padding: 20px 24px;
+    background: rgba(29,158,117,0.12);
+    border: 1px solid rgba(29,158,117,0.25);
+    border-radius: 10px;
+    max-width: 640px;
+    font-size: 15px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.6;
+  }
+  .hero-tagline strong {
+    color: #7FDDBD;
+    font-weight: 600;
+  }
+
+  /* ── NAV PILLS ── */
+  .nav-bar {
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 64px;
+    display: flex;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+  }
+  .nav-pill {
+    padding: 16px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    color: var(--text-muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    text-decoration: none;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .nav-pill:hover, .nav-pill.active {
+    color: var(--brand-dark);
+    border-bottom-color: var(--brand);
+  }
+
+  /* ── LAYOUT ── */
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 32px 120px;
+  }
+
+  /* ── SECTIONS ── */
+  .section {
+    padding-top: 72px;
+  }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 8px;
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-size: 32px;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: 24px;
+    color: var(--text);
+  }
+
+  .section-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-sub);
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+    margin-bottom: 16px;
+  }
+
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .card-body {
+    font-size: 13px;
+    color: var(--text-sub);
+    line-height: 1.75;
+  }
+
+  /* ── PAIN GRID ── */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .pain-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .pain-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .pain-head {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .pain-desc {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+
+  /* ── QUOTE ── */
+  .quote-block {
+    background: var(--yellow-bg);
+    border: 1px solid var(--yellow-border);
+    border-left: 3px solid #EF9F27;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    font-size: 13px;
+    color: var(--yellow-text);
+    font-style: italic;
+  }
+
+  .quote-source {
+    margin-top: 8px;
+    font-style: normal;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #B45309;
+  }
+
+  /* ── PRODUCT DESIGN ── */
+  .module-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+
+  .module-num {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: var(--brand);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .module-content {
+    flex: 1;
+  }
+
+  .module-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+
+  .module-desc {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+
+  .tag-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--brand-light);
+    color: var(--brand-dark);
+    border: 1px solid var(--brand-border);
+  }
+
+  .tag.grey {
+    background: var(--sidebar);
+    color: var(--text-sub);
+    border-color: var(--border);
+  }
+
+  /* ── MVP STATUS ── */
+  .mvp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .mvp-col {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+
+  .mvp-col.done {
+    border-top: 3px solid var(--brand);
+  }
+
+  .mvp-col.todo {
+    border-top: 3px solid #E8E4DD;
+  }
+
+  .mvp-col-head {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .mvp-col.done .mvp-col-head { color: var(--brand-dark); }
+  .mvp-col.todo .mvp-col-head { color: var(--text-muted); }
+
+  .mvp-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.6;
+  }
+
+  .mvp-dot {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+  }
+
+  .mvp-dot.check {
+    background: var(--brand);
+    color: #fff;
+  }
+
+  .mvp-dot.circle {
+    border: 1.5px solid var(--border);
+  }
+
+  /* ── FUTURE ROADMAP ── */
+  .roadmap-timeline {
+    position: relative;
+    padding-left: 32px;
+    margin-top: 32px;
+  }
+
+  .roadmap-timeline::before {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .roadmap-item {
+    position: relative;
+    margin-bottom: 32px;
+  }
+
+  .roadmap-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--border);
+    border: 2px solid var(--bg);
+  }
+
+  .roadmap-item.phase1::before { background: var(--brand); }
+  .roadmap-item.phase2::before { background: #60B4F4; }
+  .roadmap-item.phase3::before { background: #C084FC; }
+
+  .roadmap-phase {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+
+  .roadmap-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .roadmap-desc {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+
+  /* ── PRIVACY ── */
+  .privacy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .privacy-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .privacy-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--brand), #60D4A4);
+  }
+
+  .worry-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .worry-q {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 12px;
+    font-style: italic;
+  }
+
+  .worry-a {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.7;
+  }
+
+  .worry-a strong {
+    color: var(--brand-dark);
+  }
+
+  /* ── AXIS DIAGRAM ── */
+  .axis-block {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-top: 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .axis-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: flex-start;
+  }
+
+  .axis-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .axis-icon.green { background: var(--brand-light); }
+  .axis-icon.blue { background: #EFF6FF; }
+  .axis-icon.purple { background: #F5F3FF; }
+
+  .axis-label {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+
+  .axis-desc {
+    font-size: 12px;
+    color: var(--text-sub);
+    line-height: 1.6;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--text);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    letter-spacing: 0.3px;
+  }
+
+  .footer strong {
+    color: var(--brand);
+  }
+
+  /* ── DIVIDER ── */
+  hr.sec {
+    border: none;
+    border-top: 1px solid var(--divider);
+    margin: 64px 0 0;
+  }
+
+  /* ── INTRO BANNER ── */
+  .intro-banner {
+    background: var(--brand-light);
+    border: 1px solid var(--brand-border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--brand-dark);
+    margin-top: 32px;
+    line-height: 1.7;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .hero { padding: 48px 24px 40px; }
+    .nav-bar { padding: 0 16px; }
+    .content { padding: 0 16px 80px; }
+    .pain-grid, .mvp-grid, .privacy-grid { grid-template-columns: 1fr; }
+    .hero-meta { flex-direction: column; gap: 12px; }
+    .hero-divider { display: none; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section { animation: fadeUp 0.5s ease both; }
+
+  /* smooth scroll */
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Demo Day · 2026.04.26</div>
+  <div class="hero-title">Trace <em>履迹</em></div>
+  <div class="hero-sub">履历每一步，皆有迹可循</div>
+
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">创始人</div>
+      <div class="hero-meta-val">Nina</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">阶段</div>
+      <div class="hero-meta-val">MVP · 已上线</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">技术栈</div>
+      <div class="hero-meta-val">Next.js · Supabase · AI</div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="hero-meta-item">
+      <div class="hero-meta-label">目标用户</div>
+      <div class="hero-meta-val">职场知识型工作者</div>
+    </div>
+  </div>
+
+  <div class="hero-tagline">
+    Trace 帮职场人<strong>随手记录每天的工作</strong>，AI 整理成随时可用的汇报总结。<br>
+    每天 2–5 分钟，让你在述职、晋升、跳槽时不再"临时抱佛脚"。
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav-bar">
+  <a class="nav-pill" href="#background">项目背景</a>
+  <a class="nav-pill" href="#privacy">我们解决什么</a>
+  <a class="nav-pill" href="#design">产品设计</a>
+  <a class="nav-pill" href="#mvp">MVP 实现</a>
+  <a class="nav-pill" href="#roadmap">未来规划</a>
+  <a class="nav-pill" href="#concerns">用户顾虑</a>
+</nav>
+
+<div class="content">
+
+  <!-- ── SECTION 1: BACKGROUND ── -->
+  <section class="section" id="background">
+    <div class="section-label">Section 01</div>
+    <div class="section-title">为什么要做这件事？</div>
+    <div class="section-body">
+      大多数职场人都有这个经历：到了写周报、做述职、更新简历的时候，脑子一片空白——明明这几个月"忙得很"，却说不出自己干了什么。这不是因为他们没有努力，而是因为<strong>工作经历从来没有被系统记录下来</strong>。
+    </div>
+
+    <div class="quote-block">
+      "所有素材记录在一个地方，当有各种汇报需求的时候，可以按需导出报告，支持图表可视化。"
+      <div class="quote-source">—— 用户访谈原声 · 01</div>
+    </div>
+    <div class="quote-block" style="margin-top: 12px;">
+      "工具应该具备一定汇报框架，让我事前知道每天记录什么内容，不至于需要汇报时才发现'缺少某项素材、或者某个角度'。"
+      <div class="quote-source">—— 用户访谈原声 · 02</div>
+    </div>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">😶‍🌫️</div>
+        <div class="pain-head">记录摩擦大</div>
+        <div class="pain-desc">不知道"今天做了什么值得写"，下班脑子空，懒得动笔。零碎的工作流水账无法变成职业资产。</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📊</div>
+        <div class="pain-head">数据孤岛</div>
+        <div class="pain-desc">工作内容与 KPI/OKR 脱节，年终总结时"忙但没成效"，很难说清楚自己的贡献和价值。</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">📝</div>
+        <div class="pain-head">文书焦虑</div>
+        <div class="pain-desc">简历/周报/面试准备时，因为遗忘细节，内容空洞，无法真实展现自己的能力与成长。</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-icon">🔭</div>
+        <div class="pain-head">成长盲点</div>
+        <div class="pain-desc">缺乏长期维度的技能积累视角，不知道自己在哪里强、在哪里有缺口，职业路径模糊。</div>
+      </div>
+    </div>
+
+    <div class="intro-banner" style="margin-top: 24px;">
+      💡 现有工具（Notion、待办软件）要么太重，要么没有 AI 对齐个人的职涯诉求。市场上没有人做<strong>「工作记录在前，职业资产沉淀在后」</strong>这个细分赛道。
+    </div>
+  </section>
+
+  <hr class="sec">
+
+  <!-- ── SECTION 2: WHAT WE SOLVE ── -->
+  <section class="section" id="privacy">
+    <div class="section-label">Section 02</div>
+    <div class="section-title">我们解决了什么</div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 28px;">
+      <div style="background: var(--card-bg); border: 1px solid var(--border); border-top: 3px solid var(--brand); border-radius: 12px; padding: 24px; box-shadow: var(--shadow);">
+        <div style="font-size: 22px; margin-bottom: 12px;">🏗</div>
+        <div style="font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px;">让记录发生：结构化框架，降低摩擦</div>
+        <div style="font-size: 12px; color: var(--text-sub); line-height: 1.7;">提供以汇报或个人成长目标为终点倒推的维度目录和提示词，用户清楚知道每天该记什么。对于更模糊的经历，AI 通过追问把内容具体化——问题越细，记录越好用。</div>
+      </div>
+      <div style="background: var(--card-bg); border: 1px solid var(--border); border-top: 3px solid var(--brand); border-radius: 12px; padding: 24px; box-shadow: var(--shadow);">
+        <div style="font-size: 22px; margin-bottom: 12px;">🧠</div>
+        <div style="font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px;">让 AI 理解你：数据库解决持久记忆问题</div>
+        <div style="font-size: 12px; color: var(--text-sub); line-height: 1.7;">职业档案和历史日志长期存在数据库，AI 每次都基于你完整的职业上下文工作，不需要每次重新交代背景。持续打磨提示词工程，让 AI 输出质量不断提升。</div>
+      </div>
+      <div style="background: var(--card-bg); border: 1px solid var(--border); border-top: 3px solid var(--brand); border-radius: 12px; padding: 24px; box-shadow: var(--shadow);">
+        <div style="font-size: 22px; margin-bottom: 12px;">♻️</div>
+        <div style="font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px;">让积累增值：零散记录，多次复用</div>
+        <div style="font-size: 12px; color: var(--text-sub); line-height: 1.7;">每一条日志都是素材库的一部分，可以按需聚合为周报、月报、述职报告，也可以提炼为简历素材——记录一次，反复调用。</div>
+      </div>
+    </div>
+
+  </section>
+
+  <hr class="sec">
+
+  <!-- ── SECTION 3: PRODUCT DESIGN ── -->
+  <section class="section" id="design">
+    <div class="section-label">Section 03</div>
+    <div class="section-title">产品的完整设计</div>
+    <div class="section-body">
+      Trace 的核心逻辑是一个<strong>三维坐标系</strong>：横轴是时间（从每日日志到年度回顾），纵轴是职能维度（你的工作分类），目标轴是你的目标锚点（可以是 OKR/KPI，也可以是自己设定的成长方向）。三者交叉，构成完整的个人职业数据库。
+    </div>
+
+    <div class="axis-block">
+      <div class="axis-row">
+        <div class="axis-icon green">⏱</div>
+        <div>
+          <div class="axis-label">横轴 · 时间维度</div>
+          <div class="axis-desc">以"日"为最小颗粒度记录，支持自动聚合为周报、月报、季报、年报。每天的小积累，变成年末的大资产。</div>
+        </div>
+      </div>
+      <div class="axis-row">
+        <div class="axis-icon blue">🗂</div>
+        <div>
+          <div class="axis-label">纵轴 · 职能维度</div>
+          <div class="axis-desc">AI 根据你的职位自动生成个人专属的技能分类树（如：需求分析、项目管理、跨部门协作），按模块积累，形成技能标签库。</div>
+        </div>
+      </div>
+      <div class="axis-row" style="margin-bottom:0">
+        <div class="axis-icon purple">🎯</div>
+        <div>
+          <div class="axis-label">目标轴 · 绩效锚点</div>
+          <div class="axis-desc">将日常工作记录与目标挂钩，AI 自动评估进度。目标可以是公司定的 OKR/KPI，也可以是你自己给自己设定的成长方向——比如"今年我要在跨部门协作上有所突破"。让每一天的努力都有迹可循。</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px;">
+      <div class="card-title" style="font-size: 14px; margin-bottom: 16px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; font-size: 11px;">四大核心模块</div>
+
+      <div class="module-row">
+        <div class="module-num">01</div>
+        <div class="module-content">
+          <div class="module-name">职业档案（/profile）</div>
+          <div class="module-desc">用户的"职业身份证"。包含职业画像（基本信息、工作职责、职业方向）、汇报框架（上下级结构、汇报周期）、记录维度（AI 自动生成的工作分类目录和每日提示词）。<br><br>两种初始化路径：① 上传现有的汇报模板、历史工作总结等文件，AI 自动分析出主要工作职责和汇报框架，并给出优化建议；② 从零开始——AI 根据你的职位生成建议模板，用对话方式引导你一步步搭建，适合完全没有头绪的新用户。</div>
+          <div class="tag-row">
+            <span class="tag">文件上传分析</span>
+            <span class="tag">AI 自动初始化</span>
+            <span class="tag">维度定制</span>
+            <span class="tag">汇报框架</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-row">
+        <div class="module-num">02</div>
+        <div class="module-content">
+          <div class="module-name">工作日志（/log）</div>
+          <div class="module-desc">每日记录的主战场。左侧是个人维度目录，右侧是对应提示词引导的输入区。支持图片、文件上传，AI 可以直接读取截图、文档，自动提取关键信息归入对应维度。<br><br>AI 助手将随意描述的内容自动归类到对应字段；记录完成后异步追问补充细节，让每条日志更完整。长期积累后，AI 还可以分析记录规律，反向优化你的记录模板——越用越懂你。</div>
+          <div class="tag-row">
+            <span class="tag">图片 / 文件上传</span>
+            <span class="tag">AI 自动归类</span>
+            <span class="tag">AI 异步追问</span>
+            <span class="tag">模板持续优化</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-row">
+        <div class="module-num">03</div>
+        <div class="module-content">
+          <div class="module-name">汇报总结（/summary）</div>
+          <div class="module-desc">一键生成工作总结的模块。用户选择时间范围、汇报维度范围、报告类型（周报/月报/述职等）。如果事先在职业档案中设定了汇报框架，AI 会严格按照该模板结构生成，不会随意发挥；也可以自由选择维度灵活生成。<br><br>AI 生成草稿后，明确标注"AI 推测内容"（黄色）和"需用户补充"（红色）。用户确认修改后一键存为定稿。</div>
+          <div class="tag-row">
+            <span class="tag">按框架严格生成</span>
+            <span class="tag">维度范围自选</span>
+            <span class="tag">推测内容标注</span>
+            <span class="tag">定稿保存</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="module-row" style="margin-bottom: 0;">
+        <div class="module-num">04</div>
+        <div class="module-content">
+          <div class="module-name">简历素材库（/resume）— 规划中</div>
+          <div class="module-desc">将日志和工作总结中的亮点提炼为 STAR 格式的简历素材（情境→任务→行动→结果）。用户可以逐条打磨，"封箱"后形成个人简历素材库，支持粘贴目标 JD 后 AI 自动匹配最相关素材，生成定制化简历描述。</div>
+          <div class="tag-row">
+            <span class="tag grey">STAR 拆解</span>
+            <span class="tag grey">素材封箱</span>
+            <span class="tag grey">JD 匹配</span>
+            <span class="tag grey">下一阶段</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="sec">
+
+  <!-- ── SECTION 3: MVP ── -->
+  <section class="section" id="mvp">
+    <div class="section-label">Section 04</div>
+    <div class="section-title">MVP 实现了什么</div>
+    <div class="section-body">
+      MVP 聚焦验证一个核心假设：<strong>用户通过 AI 搭建记录框架，每天按框架记录后，AI 能生成让他满意的工作总结。</strong> 验证这个闭环，MVP 就成功了。
+    </div>
+
+    <div class="mvp-grid">
+      <div class="mvp-col done">
+        <div class="mvp-col-head">✅ MVP 核心功能</div>
+
+        <div class="mvp-item">
+          <div class="mvp-dot check">✓</div>
+          <div>邮箱注册 / 登录，用户数据行级隔离</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot check">✓</div>
+          <div>AI 自动生成职业维度树和每日提示词</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot check">✓</div>
+          <div>新用户 Onboarding 引导，无需从零配置</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot check">✓</div>
+          <div>工作日志两栏布局，日历导航，记录锁定</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot check">✓</div>
+          <div>全局 AI 助手（右侧滑出对话栏），全页面可用</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot check">✓</div>
+          <div>汇报框架自定义，记录维度多层级目录</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot check">✓</div>
+          <div>AI 汇报总结生成，含推测标注和占位符区分</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot check">✓</div>
+          <div>工作总结编辑 / 预览模式，AI 局部替换建议</div>
+        </div>
+      </div>
+
+      <div class="mvp-col todo">
+        <div class="mvp-col-head">🔭 远景功能</div>
+
+        <div class="mvp-item">
+          <div class="mvp-dot circle"></div>
+          <div>上传历史材料，AI 自动分析出职责和汇报框架</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot circle"></div>
+          <div>简历素材库（STAR 拆解、JD 匹配生成简历）</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot circle"></div>
+          <div>目标管理（OKR/KPI 或个人成长目标）</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot circle"></div>
+          <div>数据可视化（技能雷达图、记录趋势）</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot circle"></div>
+          <div>语音输入 / 文件批量分析</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot circle"></div>
+          <div>智能面试教练 &amp; 被动式岗位推荐</div>
+        </div>
+        <div class="mvp-item">
+          <div class="mvp-dot circle"></div>
+          <div>订阅付费 / 全量数据导出 · · ·</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="intro-banner" style="margin-top: 24px;">
+      🛠 技术栈：<strong>Next.js 14</strong>（前端）· <strong>Supabase</strong>（数据库 + 认证）· <strong>DeepSeek API</strong>（AI 能力）· <strong>Vercel</strong>（部署）
+    </div>
+  </section>
+
+  <hr class="sec">
+
+  <!-- ── SECTION 4: ROADMAP ── -->
+  <section class="section" id="roadmap">
+    <div class="section-label">Section 05</div>
+    <div class="section-title">下一阶段 &amp; 未来规划</div>
+    <div class="section-body">
+      产品的本质不是"数据库软件"，而是<strong>时间与成就的复利管理机</strong>。数据积累越多，用户的转移成本越高，这是真正的护城河。
+    </div>
+
+    <div class="roadmap-timeline">
+
+      <div class="roadmap-item phase1">
+        <div class="roadmap-phase">Phase 1 · 当前 → 近期</div>
+        <div class="roadmap-title">价值闭环验证：日志 → 总结 → 用户满意</div>
+        <div class="roadmap-desc">持续优化 AI 生成质量，提升总结草稿的可用率。增加日常后置追问弹窗，引导用户补充亮点细节。建立用户留存机制（固定提醒、连续记录 Streak），解决"第 15 天为什么还会打开"的留存难题。</div>
+        <div class="tag-row" style="margin-top: 10px;">
+          <span class="tag">留存机制</span>
+          <span class="tag">Prompt 质量</span>
+          <span class="tag">追问弹窗</span>
+        </div>
+      </div>
+
+      <div class="roadmap-item phase2">
+        <div class="roadmap-phase">Phase 2 · 3–6 个月</div>
+        <div class="roadmap-title">简历素材库 &amp; JD 匹配生成</div>
+        <div class="roadmap-desc">上线简历素材库：将日志和总结中的经历提炼为 STAR 格式素材，用户逐条打磨并"封箱"。支持用户粘贴目标 JD，AI 从封箱素材中召回最匹配内容，组合生成定制化简历描述。让求职不再是临时抱佛脚。</div>
+        <div class="tag-row" style="margin-top: 10px;">
+          <span class="tag">STAR 素材</span>
+          <span class="tag">JD 匹配</span>
+          <span class="tag">简历生成</span>
+        </div>
+      </div>
+
+      <div class="roadmap-item phase2">
+        <div class="roadmap-phase">Phase 2 · 3–6 个月</div>
+        <div class="roadmap-title">OKR 目标管理 &amp; 数据可视化</div>
+        <div class="roadmap-desc">支持用户导入 OKR，AI 定期扫描日志评估进度。提供技能维度雷达图、记录趋势折线等数据看板，让用户直观看到自己的成长轨迹和能力分布，强化"数据即成就"的正反馈。</div>
+        <div class="tag-row" style="margin-top: 10px;">
+          <span class="tag">OKR 管理</span>
+          <span class="tag">成长看板</span>
+          <span class="tag">技能雷达图</span>
+        </div>
+      </div>
+
+      <div class="roadmap-item phase3">
+        <div class="roadmap-phase">Phase 3 · 远景</div>
+        <div class="roadmap-title">智能面试教练 &amp; 职业匹配推荐</div>
+        <div class="roadmap-desc">基于用户积累的真实项目库，生成定制化模拟面试题和回答框架。AI 分析技能成长曲线，主动推送与用户能力模型匹配的岗位机会，实现"被动式求职"——让机会找到你，而不是你去找机会。</div>
+        <div class="tag-row" style="margin-top: 10px;">
+          <span class="tag">模拟面试</span>
+          <span class="tag">岗位推荐</span>
+          <span class="tag">被动式求职</span>
+        </div>
+      </div>
+
+      <div class="roadmap-item phase3" style="margin-bottom:0">
+        <div class="roadmap-phase">Phase 3 · 商业化</div>
+        <div class="roadmap-title">订阅付费 &amp; 数据导出</div>
+        <div class="roadmap-desc">免费层（基础记录和日志获客）→ 订阅层（解锁简历生成、面试模拟、高级 AI 分析等增值功能）→ 用户数据完整导出，数据主权始终归属用户个人 · · ·</div>
+        <div class="tag-row" style="margin-top: 10px;">
+          <span class="tag">Freemium</span>
+          <span class="tag">订阅变现</span>
+          <span class="tag">数据主权</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="sec">
+
+  <!-- ── SECTION 6: USER CONCERNS ── -->
+  <section class="section" id="concerns">
+    <div class="section-label">Section 06</div>
+    <div class="section-title">用户的顾虑，我们怎么看</div>
+    <div class="section-body">
+      用户在访谈和问卷中提出的顾虑是真实且合理的，我们在产品设计阶段认真考虑了每一条。
+    </div>
+
+    <div class="privacy-grid">
+      <div class="privacy-card">
+        <div class="worry-label">顾虑 01</div>
+        <div class="worry-q">"我记录的是真实工作内容，你们能看到吗？"</div>
+        <div class="worry-a">
+          <strong>用户之间完全隔离</strong>：数据库行级安全机制确保每条数据只有本人账号可以读写，其他用户无法访问。<br><br>
+          <strong>内容不用于训练</strong>：用户数据不会被用于训练任何公共 AI 模型，这是我们的产品承诺。
+        </div>
+      </div>
+
+      <div class="privacy-card">
+        <div class="worry-label">顾虑 02</div>
+        <div class="worry-q">"AI 生成的内容不准确，万一出现不实内容怎么办？"</div>
+        <div class="worry-a">
+          <strong>AI 推测标注</strong>：所有 AI 推测出的内容会用<span style="background:#FFFBEB;color:#92400E;padding:1px 6px;border-radius:4px;font-size:11px;">黄色标注</span>明确提示，用户确认后才进入正文。<br><br>
+          <strong>可回溯性</strong>：每条总结都注明"基于 N 条日志生成"，用户可以随时追溯原始日志，验证内容来源。<br><br>
+          <strong>人类最终决策</strong>：AI 是"整理助手"，不是"内容创作者"，所有最终存档内容必须经过用户主动确认。
+        </div>
+      </div>
+
+      <div class="privacy-card">
+        <div class="worry-label">顾虑 03</div>
+        <div class="worry-q">"我的数据会不会被锁死在你们平台？"</div>
+        <div class="worry-a">
+          <strong>全量数据导出</strong>：用户可一键将所有日志、总结、素材导出为通用格式，数据主权完全属于用户自己。<br><br>
+          <strong>账户注销含数据清除</strong>：注销账户并选择删除数据后，所有内容从服务器彻底清除，无保留。<br><br>
+          这是我们的<strong>「信任优先」战略</strong>——你的数据越自由，你才越愿意持续记录。
+        </div>
+      </div>
+
+      <div class="privacy-card">
+        <div class="worry-label">顾虑 04</div>
+        <div class="worry-q">"每天记录，坚持不下去怎么办？"</div>
+        <div class="worry-a">
+          <strong>降低记录摩擦</strong>：提示词引导 + AI 助手帮助归类，用户不需要"想怎么写"，只需要"告诉 AI 今天做了什么"。<br><br>
+          <strong>拒绝实时逼问</strong>：AI 在用户完成记录后<strong>异步追问</strong>，不强制打断工作流，变"打卡任务"为"对话咨询"。<br><br>
+          <strong>即时正反馈</strong>：每次记录完，AI 立即生成工作亮点摘要，让用户每天都能感受到"被看见"的价值感。
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <strong>Trace 履迹</strong> · Demo Day 展示材料 · 2026.04.26<br>
+  Made by Nina · 用 AI 帮你留住每一步成长的痕迹
+</div>
+
+<script>
+  // Nav active state on scroll
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const pills = document.querySelectorAll('.nav-pill');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        pills.forEach(p => p.classList.remove('active'));
+        const active = document.querySelector(`.nav-pill[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
